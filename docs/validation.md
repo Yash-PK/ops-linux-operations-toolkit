@@ -1,19 +1,38 @@
 # Validation report
 
-Status: implementation in progress; no release designation yet.
+Local core and clean-clone gates passed on 2026-10-06. Linux integration and
+GitHub CI are pending; no release or full Linux integration designation yet.
 
-Required gates: locked bootstrap, Ruff, ShellCheck, shfmt, actionlint, repository
-checks, fixture/unit tests, portable live demo, secret scans of staged files and
-full history, and a clean temporary clone running the documented commands.
-Linux integration runs separately on Linux. Hosted CI must be verified against
-the exact remote commit before a versioned release.
+Tested source revision: `55f15eaacf3842fa15f44751d5f21a5094bd089c`.
 
-The `evidence/` directory will contain JSON reports created by
-`python3 scripts/record_validation.py --profile local` (or `linux`). The recorder
-requires a clean committed source tree and records its exact revision, platform,
-versions, commands, output and exit codes. Later evidence/documentation commits
-do not change the identity of the originally tested code.
+| Profile | Environment | Actual result | Evidence |
+| --- | --- | --- | --- |
+| Local | macOS Darwin 25.6.0, ARM64, Python 3.14.7, Bash 3.2.57 | 58 tests; Ruff, ShellCheck, shfmt, actionlint, links; portable live demo; working/index/full-history Gitleaks all passed | [Command report](../evidence/55f15eaacf38-local.json) |
+| Clean clone | Fresh external temporary clone, independent locked bootstrap on same Mac | bootstrap, doctor, validate, demo, security all exit 0; tree clean; scratch removed | [Clone report](../evidence/55f15eaacf38-clean-clone.json) |
+| Live Linux | Not run locally: development host is macOS | Unverified; configured CI profile requires real Linux sources | Pending |
+| Real systemd VM / privileged diagnostics | Not provisioned | Unverified | None |
 
-Optional real-systemd VM, privileged diagnostics, cgroup policy and additional
-distributions remain unverified. Cloud deployment and package publication are
-disabled. No host configuration is changed by the validation workflow.
+The fixture suite covers all ten health capabilities and inventory parsers with
+healthy/degraded/missing-tool/invalid inputs, timeout/output limits, error
+redaction, duplicate JSON keys, special-file rejection and policy edge cases.
+The live Mac demo exercises only disk, inode and metadata/identity capabilities.
+
+Resolved during validation: sandbox command PATH initially selected Python 3.9;
+bootstrap used the verified explicit Python 3.14 path. Make now uses its local
+virtual environment. Lint caught late-bound test lambdas; the test task initially
+omitted its source import path. Both defects were fixed before the tested commit.
+The first pre-commit security run intentionally failed the required history gate
+because no history existed; after the initial commit all history scans passed.
+No checks were weakened or skips represented as passing tests.
+
+Evidence files record exact source revision, timestamps, environment, tool
+versions, commands, exits and sanitized output. This report and the evidence are
+committed afterward; that later documentation commit is not the tested source
+revision. Required local publishing gates pass; release additionally requires
+passing Linux integration and CI for the exact published revision.
+
+No cloud resources, VMs, containers or host configuration changes were created.
+Disposable test and clone directories were cleaned. Repo-local developer caches
+remain ignored. Full outgoing-history Gitleaks reported no findings; this is not
+a vulnerability-free guarantee. GNU Bash upstream support verification and
+transitive binary SBOM/CVE analysis remain explicitly limited in dependency docs.
