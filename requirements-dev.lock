@@ -1,0 +1,7 @@
+# Runtime uses only Python standard library. Wheels only; no source builds.
+# Ruff 0.16.10 official PyPI metadata verified 2026-10-06.
+ruff==0.16.10 \
+    --hash=sha256:3031a4a2e8e7b8a46f70be45f198c35a11ece509a94b80334d8d397a33c67550 \
+    --hash=sha256:e748ff95c934c4e978783b8e687bc174e7bd84e8ad24e3243e1ecfcda5e0282d \
+    --hash=sha256:f33f43a864a8483eebd160e713336c8bab02c934feaff0a33cf5ccb41546d09a \
+    --hash=sha256:494401c86df4c4c25f69b9419605d944467ee98c42fb6ad405ef4fa40b8fb67d

@@ -1,0 +1,108 @@
+{
+  "commands": {
+    "dpkg-query -W -f=${db:Status-Status}\\n": {
+      "stdout": "installed\ninstalled\nconfig-files\n"
+    },
+    "getfacl --omit-header --numeric --absolute-names -- sample.txt": {
+      "stdout": "user::rw-\ngroup::r--\nother::r--\n"
+    },
+    "journalctl --quiet --no-pager --output=json --output-fields=PRIORITY --lines=100 --since=-1h": {
+      "stdout": "{\"PRIORITY\":\"6\"}\n{\"PRIORITY\":\"4\"}\n"
+    },
+    "openssl x509 -in certificate.pem -noout -enddate": {
+      "stdout": "notAfter=Jan  2 00:00:00 2026 GMT\n"
+    },
+    "ss -H -lntu": {
+      "stdout": "tcp LISTEN 0 128 127.0.0.1:8080 0.0.0.0:*\nudp UNCONN 0 0 127.0.0.1:5353 0.0.0.0:*\n"
+    },
+    "systemctl list-timers --all --no-legend --no-pager": {
+      "stdout": "Thu 2026-01-01 12:00:00 UTC 1h left n/a n/a demo.timer demo.service\n"
+    },
+    "systemctl show demo.service --property=LoadState,ActiveState,SubState --no-pager": {
+      "stdout": "LoadState=loaded\nActiveState=failed\nSubState=failed\n"
+    }
+  },
+  "cpu_count": 2,
+  "directories": {
+    "/etc/cron.d": [
+      "demo"
+    ],
+    "/etc/cron.daily": [
+      "logrotate"
+    ],
+    "/etc/logrotate.d": [
+      "demo"
+    ]
+  },
+  "disks": {
+    "/": {
+      "f_bavail": 100,
+      "f_bfree": 500,
+      "f_blocks": 10000,
+      "f_ffree": 10,
+      "f_files": 1000,
+      "f_frsize": 4096
+    }
+  },
+  "files": {
+    "/proc/loadavg": "8.00 5.00 2.00 1/10 123\n",
+    "/proc/meminfo": "MemTotal: 1000000 kB\nMemAvailable: 10000 kB\n",
+    "/proc/stat": [
+      "cpu  10 0 10 80 0 0 0 0 0 0\n",
+      "cpu  105 0 10 85 0 0 0 0 0 0\n"
+    ]
+  },
+  "fixture_schema": 1,
+  "identity": {
+    "gid": 1000,
+    "local_group_count": 25,
+    "local_user_count": 20,
+    "supplementary_group_count": 2,
+    "uid": 1000
+  },
+  "metadata": {
+    "backup.tar": {
+      "gid": 1000,
+      "mode": 420,
+      "mtime": 1766966400.0,
+      "regular": true,
+      "symlink": false,
+      "uid": 1000
+    },
+    "certificate.pem": {
+      "gid": 1000,
+      "mode": 420,
+      "mtime": 1767222000.0,
+      "regular": true,
+      "symlink": false,
+      "uid": 1000
+    },
+    "sample.txt": {
+      "gid": 1000,
+      "mode": 420,
+      "mtime": 1767222000.0,
+      "regular": true,
+      "symlink": false,
+      "uid": 1000
+    }
+  },
+  "now": "2026-01-01T00:00:00+00:00",
+  "platform": "Linux",
+  "process_skipped": 0,
+  "process_states": [
+    "S",
+    "R",
+    "S",
+    "I"
+  ],
+  "tools": [
+    "ss",
+    "openssl",
+    "systemctl",
+    "getfacl",
+    "journalctl",
+    "dpkg-query",
+    "vmstat",
+    "logrotate"
+  ]
+}
