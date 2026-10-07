@@ -58,3 +58,9 @@ enabled. Branch protection is proposed in the publishing guide, not applied.
 
 Subsequent documentation/evidence commits preserve this original revision
 accounting. Their CI results must be checked separately before release.
+
+The subsequent evidence/documentation revision
+`ada345ab55a9b551ff186e05cb62970d67dae03f` also passed
+[run 37571448796](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37571448796).
+Source and validation scripts are unchanged from the locally clean-clone-tested
+revision; differences are evidence and documentation only.

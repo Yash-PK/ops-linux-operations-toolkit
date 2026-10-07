@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0 — release candidate
+## 0.1.0 — 2026-10-07
 
 - Implemented read-only health collection with typed JSON/text reports and
   explicit health, input-error and source-unavailability exit codes.
@@ -11,5 +11,5 @@
 
 The core has passed local/clean-clone gates and real Linux CI, including
 systemd/journal/ACL metadata on the hosted runner. See the validation report for
-exact tested revisions. The versioned release is published only after final
-revision CI verification; optional VM lifecycle profiles remain unverified.
+exact tested revisions. Versioned publication is gated on exact-revision CI. Optional VM lifecycle
+profiles remain unverified; this is a lab/reference release.
