@@ -1,7 +1,8 @@
 # Validation report
 
-Local core and clean-clone gates passed on 2026-10-06. Linux integration and
-GitHub CI are pending; no release or full Linux integration designation yet.
+Core local, clean-clone and live Linux CI gates passed. The supported Linux
+profile is integration-tested on the standard GitHub-hosted Ubuntu x86-64 runner.
+This does not establish full OS lifecycle behavior or production readiness.
 
 Tested source revision: `55f15eaacf3842fa15f44751d5f21a5094bd089c`.
 
@@ -9,7 +10,7 @@ Tested source revision: `55f15eaacf3842fa15f44751d5f21a5094bd089c`.
 | --- | --- | --- | --- |
 | Local | macOS Darwin 25.6.0, ARM64, Python 3.14.7, Bash 3.2.57 | 58 tests; Ruff, ShellCheck, shfmt, actionlint, links; portable live demo; working/index/full-history Gitleaks all passed | [Command report](../evidence/55f15eaacf38-local.json) |
 | Clean clone | Fresh external temporary clone, independent locked bootstrap on same Mac | bootstrap, doctor, validate, demo, security all exit 0; tree clean; scratch removed | [Clone report](../evidence/55f15eaacf38-clean-clone.json) |
-| Live Linux | Not run locally: development host is macOS | Unverified; configured CI profile requires real Linux sources | Pending |
+| Live Linux CI | Ubuntu 24.04 runner, kernel 6.17.0-1022-azure, x86-64, Python 3.14.7 | All gates including real Linux integration exit 0 | [Linux report](../evidence/0b0f077933bb-linux.json) |
 | Real systemd VM / privileged diagnostics | Not provisioned | Unverified | None |
 
 The fixture suite covers all ten health capabilities and inventory parsers with
@@ -36,3 +37,24 @@ Disposable test and clone directories were cleaned. Repo-local developer caches
 remain ignored. Full outgoing-history Gitleaks reported no findings; this is not
 a vulnerability-free guarantee. GNU Bash upstream support verification and
 transitive binary SBOM/CVE analysis remain explicitly limited in dependency docs.
+
+## Published Linux evidence
+
+[Run 37459272607](https://github.com/Yash-PK/ops-linux-operations-toolkit/actions/runs/37459272607)
+passed for `0b0f077933bb06e2b9016f50ff5d8b1fbcebddf4`. The artifact was downloaded
+and inspected; the report above is a preserved copy, not generated output from
+this Mac. Actual live assertions covered CPU/load/memory/disk/inodes/processes/
+sockets, metadata/identity/package inventory, a temporary backup marker's
+fresh-stale-recovered cycle, and a real local certificate checked with two
+policies. The runner also exercised a loaded dbus systemd unit, journal metadata,
+schedule counts and getfacl. Temporary data and ephemeral certificate keys were
+cleaned. No service mutation, boot/reboot, remote TLS, cgroup or privileged
+diagnostic behavior is claimed.
+
+Repository owner `Yash-PK`, public visibility, default branch `main`, and remote
+SHA were independently verified. Free repository-level secret scanning, push
+protection and private vulnerability reporting were enabled and read back as
+enabled. Branch protection is proposed in the publishing guide, not applied.
+
+Subsequent documentation/evidence commits preserve this original revision
+accounting. Their CI results must be checked separately before release.

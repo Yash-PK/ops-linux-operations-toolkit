@@ -5,6 +5,10 @@ policy, machine-readable results, and reproducible failure cases. This is
 lab/reference engineering work. It neither remediates a host nor establishes
 production readiness.
 
+Validated on macOS ARM64 for portable checks and on GitHub-hosted Ubuntu x86-64
+for live Linux checks. [Revision-linked results](docs/validation.md) distinguish
+fixtures, runtime assertions, and unverified extensions.
+
 The practical problem is ambiguity: a missing command is different from a
 healthy service, and a recent backup file does not establish recoverability.
 This CLI reports these distinctions instead of printing unconditional success.
